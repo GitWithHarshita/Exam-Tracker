@@ -52,14 +52,15 @@ document.getElementById("break-idea-btn").addEventListener("click", () => {
   document.getElementById("break-idea").innerText = idea;
 });
 
-// Progress Tracking
-function updateProgress() {
-  const checkboxes = document.querySelectorAll("#subjects input[type='checkbox']");
-  const total = checkboxes.length;
-  const completed = Array.from(checkboxes).filter(checkbox => checkbox.checked).length;
-  const progressPercentage = Math.floor((completed / total) * 100);
-  document.getElementById("progress").innerText = `Progress: ${progressPercentage}%`;
-}
+// ------------------ problem yehi pe tha ------------------
+// // Progress Tracking
+// function updateProgress() {
+//   const checkboxes = document.querySelectorAll("#subjects input[type='checkbox']");
+//   const total = checkboxes.length;
+//   const completed = Array.from(checkboxes).filter(checkbox => checkbox.checked).length;
+//   const progressPercentage = Math.floor((completed / total) * 100);
+//   document.getElementById("progress").innerText = `Progress: ${progressPercentage}%`;
+// }
 
 // Add event listeners to checkboxes
 const checkboxes = document.querySelectorAll("#subjects input[type='checkbox']");
@@ -68,7 +69,7 @@ checkboxes.forEach(checkbox => {
 });
 
 // Initialize progress on page load
-updateProgress();
+// updateProgress();
 
 document.addEventListener("DOMContentLoaded", function() {
   // Variables for tracking the progress
@@ -87,7 +88,7 @@ document.addEventListener("DOMContentLoaded", function() {
   // Function to update progress bar and countdown timer
   function updateStudyProgress() {
     // Calculate progress as a percentage
-    let progress = Math.min((studyTime / maxStudyGoal) * 100, 100); // Don't exceed 100%
+    let progress = Math.min((studyTime / maxStudyGoal) * 100, 100); 
 
     // Update progress bar and percentage display
     progressBar.style.width = `${progress}%`;
@@ -138,7 +139,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Update the progress bar and countdown
     updateStudyProgress();
-
+    console.log("testing", studyTime);
     // Reset input field after logging
     studyHoursInput.value = '';
   });
