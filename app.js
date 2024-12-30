@@ -119,7 +119,7 @@ document.addEventListener("DOMContentLoaded", function() {
       countdownTimerDisplay.textContent = `${hours}:${minutes}`;
 
       remainingTime--;
-    }, 60000); // Update every minute
+    }, 1000); // Update every minute
   }
 
   // Event listener for "Log Study Time" button
