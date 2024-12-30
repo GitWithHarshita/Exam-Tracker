@@ -20,6 +20,7 @@ body {
   background-attachment: fixed;
   opacity: 0.5; /* Adjust the opacity of the background image */
   z-index: -1; /* Ensure it stays behind the content */
+  object-fit: cover;
 }
 
 h1 {
