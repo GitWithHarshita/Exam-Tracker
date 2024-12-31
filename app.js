@@ -84,22 +84,21 @@ document.addEventListener("DOMContentLoaded", function() {
 
   let studyTime = 0; // Stores the total study time logged today
   let countdownInterval;
-
-  // Function to update progress bar and countdown timer
-  function updateStudyProgress() {
-    // Calculate progress as a percentage
-    let progress = Math.min((studyTime / maxStudyGoal) * 100, 100); 
-
-    // Update progress bar and percentage display
+  let elapsedTime = 0; 
+  
+  function updateStudyProgress(maxStudyGoal, elapsedTime) {
+    const totalTime = maxStudyGoal ;
+    let remainingTime = Math.max(totalTime - elapsedTime, 0);
+    let progress = Math.min(((totalTime - remainingTime) / totalTime) * 100, 100);
     progressBar.style.width = `${progress}%`;
     progressPercentageDisplay.textContent = `${Math.round(progress)}%`;
+    const hrs = Math.floor(remainingTime / 60);
+    const min = remainingTime % 60;
+    countdownTimerDisplay.textContent = `${hrs}H ${min}m remaining`;
+}
 
-    // Update the countdown timer (remaining time to reach the goal)
-    let remainingTime = (maxStudyGoal - studyTime) * 60; // in minutes
-    startCountdown(remainingTime);
-  }
 
-  // Function to start countdown
+  // Function to start countdown timer
   function startCountdown(remainingTime) {
     // Clear existing countdown interval
     clearInterval(countdownInterval);
@@ -119,7 +118,7 @@ document.addEventListener("DOMContentLoaded", function() {
       countdownTimerDisplay.textContent = `${hours}:${minutes}`;
 
       remainingTime--;
-    }, 1000); // Update every minute
+    }, 600000); // Update every minute
   }
 
   // Event listener for "Log Study Time" button
@@ -137,10 +136,15 @@ document.addEventListener("DOMContentLoaded", function() {
     // Update the study time display and progress
     studyTimeDisplay.textContent = studyTime.toFixed(1);
 
-    // Update the progress bar and countdown
-    updateStudyProgress();
-    console.log("testing", studyTime);
-    // Reset input field after logging
+    // Calculate the remaining time for the day and start the countdown
+    const intervalId = setInterval(() => {
+    elapsedTime++;
+    updateStudyProgress(maxStudyGoal, elapsedTime);
+    if (elapsedTime >= maxStudyGoal ) {
+        clearInterval(intervalId); 
+    }
+    }, 600000);
+   
     studyHoursInput.value = '';
   });
 });
